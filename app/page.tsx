@@ -1,37 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export default function TermsPage() {
   const [activeSection, setActiveSection] = useState('welcome');
   const [highlightedSection, setHighlightedSection] = useState<string | null>(null);
-  const [darkMode, setDarkMode] = useState(false);
-
-  useEffect(() => {
-    // On mount, check localStorage for theme
-    const stored = localStorage.getItem('theme');
-    if (stored === 'dark') {
-      setDarkMode(true);
-      document.documentElement.classList.add('dark');
-    } else {
-      setDarkMode(false);
-      document.documentElement.classList.remove('dark');
-    }
-  }, []);
-
-  const toggleDarkMode = () => {
-    setDarkMode((prev) => {
-      const next = !prev;
-      if (next) {
-        document.documentElement.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
-      }
-      return next;
-    });
-  };
 
   const sections = [
     { id: 'welcome', title: 'Welcome to Papyrus', anchor: 'welcome' },
@@ -83,31 +56,19 @@ export default function TermsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white dark:bg-gray-900 shadow-sm border-b dark:border-gray-800">
+      <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
             <div className="flex items-center">
-              <div className="flex-shrink-0 flex flex-row items-center gap-2">
+              <div className="flex-shrink-0">
                 <img src="/logo.png" alt="Papyrus Logo" className="h-12 w-auto" />
-                <p className='text-gray-500 dark:text-gray-300 ml-13'>Terms & Conditions</p>
+                <p className='text-gray-500 ml-13'>Terms & Conditions</p>
               </div>
             </div>
-            <div className="flex items-center gap-4">
-              {/* Dark mode toggle */}
-              <button
-                onClick={toggleDarkMode}
-                aria-label="Toggle dark mode"
-                className="rounded-full p-2 border dark:border-gray-700 border-gray-300 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-              >
-                {darkMode ? (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m8.66-8.66l-.71.71M4.05 19.07l-.71.71M21 12h-1M4 12H3m16.95 7.07l-.71-.71M6.34 6.34l-.71-.71" /></svg>
-                ) : (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-600 dark:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" /></svg>
-                )}
-              </button>
-              <p className="text-sm text-gray-500 dark:text-gray-300">Last updated: July 2025</p>
+            <div className="hidden md:block">
+              <p className="text-sm text-gray-500">Last updated: July 2025</p>
             </div>
           </div>
         </div>
@@ -118,8 +79,8 @@ export default function TermsPage() {
           {/* Navigation Sidebar */}
           <div className="lg:col-span-1">
             <nav className="sticky top-8">
-              <div className="bg-white dark:bg-gray-900 rounded-lg shadow-sm border dark:border-gray-800 p-6">
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Table of Contents</h2>
+              <div className="bg-white rounded-lg shadow-sm border p-6">
+                <h2 className="text-lg font-semibold text-gray-900 mb-4">Table of Contents</h2>
                 <ul className="space-y-2">
                   {sections.map((section) => (
                     <li key={section.id}>
@@ -127,13 +88,13 @@ export default function TermsPage() {
                         onClick={() => scrollToSection(section.id)}
                         className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors ${
                           activeSection === section.id
-                            ? 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 font-medium'
-                            : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800'
+                            ? 'bg-blue-100 text-blue-700 font-medium'
+                            : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
                         }`}
                       >
                         {section.title}
                       </button>
-                    </li>
+          </li>
                   ))}
                 </ul>
               </div>
@@ -142,13 +103,13 @@ export default function TermsPage() {
 
           {/* Main Content */}
           <div className="lg:col-span-3 mt-8 lg:mt-0">
-            <div className="bg-white dark:bg-gray-900 rounded-lg shadow-sm border dark:border-gray-800 p-8">
+            <div className="bg-white rounded-lg shadow-sm border p-8">
               {/* Welcome Section */}
               <section 
                 id="welcome" 
                 className={`mb-12 transition-all duration-500 ${
                   highlightedSection === 'welcome' 
-                    ? 'bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-400 dark:border-yellow-600 pl-4 rounded-r-lg' 
+                    ? 'bg-yellow-50 border-l-4 border-yellow-400 pl-4 rounded-r-lg' 
                     : ''
                 }`}
               >
@@ -156,22 +117,22 @@ export default function TermsPage() {
                   
                 </div>
                 <div className='flex flex-row gap-1 items-center'>
-                <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6">Welcome to</h2>
+                <h2 className="text-3xl font-bold text-gray-900 mb-6">Welcome to</h2>
                 <img src="/logo.png" alt="Papyrus Logo" className="h-10 w-auto mt-[-26]" />
                 </div>
            
                 <div className="prose prose-lg max-w-none">
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     Welcome to the Papyrus platform, owned and operated by Papyrus Corp. ("Papyrus", "we", or "us"). 
-                    These Terms of Service, along with our <button onClick={() => scrollToSection('acceptable-use')} className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-600 underline">Code of Conduct</button> and <button onClick={() => scrollToSection('privacy')} className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-600 underline">Privacy Policy</button>, form a legal agreement 
+                    These Terms of Service, along with our <button onClick={() => scrollToSection('acceptable-use')} className="text-blue-600 hover:text-blue-800 underline">Code of Conduct</button> and <button onClick={() => scrollToSection('privacy')} className="text-blue-600 hover:text-blue-800 underline">Privacy Policy</button>, form a legal agreement 
                     between you and Papyrus.
                   </p>
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     By using papyrus.com (the "Site"), creating a Papyrus account, posting content (such as stories, 
                     comments, or messages), or viewing content through our website or mobile apps (collectively, the "Services"), 
                     you agree to follow these Terms of Service.
                   </p>
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     If you do not agree to these terms, you may not use the Papyrus Services.
                   </p>
                 </div>
@@ -182,13 +143,13 @@ export default function TermsPage() {
                 id="age-requirement" 
                 className={`mb-12 transition-all duration-500 ${
                   highlightedSection === 'age-requirement' 
-                    ? 'bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-400 dark:border-yellow-600 pl-4 rounded-r-lg' 
+                    ? 'bg-yellow-50 border-l-4 border-yellow-400 pl-4 rounded-r-lg' 
                     : ''
                 }`}
               >
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">Age Requirement</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Age Requirement</h2>
                 <div className="prose prose-lg max-w-none">
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     Papyrus Services are only available to individuals who are 16 years of age or older. If we become 
                     aware that someone under the age of 16 is using Papyrus Services, we will terminate their account.
                   </p>
@@ -200,23 +161,23 @@ export default function TermsPage() {
                 id="account-requirement" 
                 className={`mb-12 transition-all duration-500 ${
                   highlightedSection === 'account-requirement' 
-                    ? 'bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-400 dark:border-yellow-600 pl-4 rounded-r-lg' 
+                    ? 'bg-yellow-50 border-l-4 border-yellow-400 pl-4 rounded-r-lg' 
                     : ''
                 }`}
               >
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">Account Requirement</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Account Requirement</h2>
                 <div className="prose prose-lg max-w-none">
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     To access features of the Papyrus platform, you are required to create an account by selecting a 
                     username and password.
                   </p>
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     You are solely responsible for all activity that occurs under your account and for maintaining the 
                     confidentiality of your login credentials. Sharing your account information with others may result 
                     in unauthorized access, and we may not be able to verify the rightful account holder in such cases. 
                     Papyrus is not liable for any loss or damage arising from the misuse of your account by you or others.
                   </p>
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     If you believe your account has been accessed without your authorization, please report the issue 
                     promptly at insert contact information.
                   </p>
@@ -228,37 +189,37 @@ export default function TermsPage() {
                 id="content-ownership" 
                 className={`mb-12 transition-all duration-500 ${
                   highlightedSection === 'content-ownership' 
-                    ? 'bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-400 dark:border-yellow-600 pl-4 rounded-r-lg' 
+                    ? 'bg-yellow-50 border-l-4 border-yellow-400 pl-4 rounded-r-lg' 
                     : ''
                 }`}
               >
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">You Own Your Content</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">You Own Your Content</h2>
                 <div className="prose prose-lg max-w-none">
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
-                    Before sharing anything on Papyrus, please review our <button onClick={() => scrollToSection('acceptable-use')} className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-600 underline">Content Guidelines</button>. If your content doesn't 
+                  <p className="text-gray-700 mb-4">
+                    Before sharing anything on Papyrus, please review our <button onClick={() => scrollToSection('acceptable-use')} className="text-blue-600 hover:text-blue-800 underline">Content Guidelines</button>. If your content doesn't 
                     follow these rules, it may be removed at any time.
                   </p>
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     You retain full ownership of any content you create and upload to Papyrus. However, uploading 
                     content that you do not own does not make it yours. Only share content that you either own or 
                     have permission to use—especially if that includes giving Papyrus the rights needed to display it.
                   </p>
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     By posting content on Papyrus, you grant us a nonexclusive license to use it on our platform. 
                     This includes displaying, storing, formatting, and distributing your content so that others can 
                     access it through Papyrus. You also have the ability to choose how you license your work to the 
-                    community. For guidance, please refer to our <button onClick={() => scrollToSection('copyright-issues')} className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-600 underline">Copyright FAQ</button>.
+                    community. For guidance, please refer to our <button onClick={() => scrollToSection('copyright-issues')} className="text-blue-600 hover:text-blue-800 underline">Copyright FAQ</button>.
                   </p>
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     You are solely responsible for the content you post. This means you accept all associated risks, 
                     including legal claims related to ownership, accuracy, or rights.
                   </p>
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
-                    Papyrus is a free platform, and to support that, we may display <button onClick={() => scrollToSection('advertisements')} className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-600 underline">advertisements</button> alongside your 
+                  <p className="text-gray-700 mb-4">
+                    Papyrus is a free platform, and to support that, we may display <button onClick={() => scrollToSection('advertisements')} className="text-blue-600 hover:text-blue-800 underline">advertisements</button> alongside your 
                     content. We may also use your content to help promote Papyrus. However, we will never sell your 
                     content to third parties without your explicit permission.
                   </p>
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     At times, you may agree to additional terms—such as when participating in a contest or joining 
                     a program like Papyrus Stars. If there is a conflict between those terms and these general Terms 
                     of Service, the specific terms will apply.
@@ -271,38 +232,38 @@ export default function TermsPage() {
                 id="service-rights" 
                 className={`mb-12 transition-all duration-500 ${
                   highlightedSection === 'service-rights' 
-                    ? 'bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-400 dark:border-yellow-600 pl-4 rounded-r-lg' 
+                    ? 'bg-yellow-50 border-l-4 border-yellow-400 pl-4 rounded-r-lg' 
                     : ''
                 }`}
               >
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">Our Rights to the Services</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Our Rights to the Services</h2>
                 <div className="prose prose-lg max-w-none">
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     Papyrus owns all rights to the design, layout, and content of the Site and Services. This includes 
                     our source code, logos, and visual elements. You may not copy, modify, or use any part of our 
                     design or branding without our written permission, unless stated otherwise in this section.
                   </p>
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     Please do not use the Papyrus logo or trademarks in a way that suggests Papyrus endorses or is 
                     affiliated with your product, service, or business—unless we have given you written approval. 
                     You must also not alter our logo in any way, including resizing, decorating, or changing its 
                     appearance. We value the integrity of our brand and aim to keep it consistent. For proper use, 
                     please refer to our Brand Guidelines.
                   </p>
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     Papyrus may modify, limit, or discontinue parts of the Services at any time, without prior notice. 
                     We also reserve the right to remove any content you post, at our sole discretion.
                   </p>
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     Additionally, Papyrus may access, store, and share your information if we believe it is necessary to:
                   </p>
-                  <ol className="list-decimal list-inside text-gray-700 dark:text-gray-300 mb-4 space-y-2">
+                  <ol className="list-decimal list-inside text-gray-700 mb-4 space-y-2">
                     <li>Comply with applicable laws or legal requests</li>
                     <li>Enforce our Terms of Service or investigate potential violations</li>
                     <li>Detect and prevent fraud, security breaches, or technical problems</li>
                     <li>Respond to user support requests</li>
                     <li>Protect the rights, property, and safety of Papyrus, our users, or the public</li>
-                  </ol>
+        </ol>
                 </div>
               </section>
 
@@ -311,29 +272,29 @@ export default function TermsPage() {
                 id="copyright-issues" 
                 className={`mb-12 transition-all duration-500 ${
                   highlightedSection === 'copyright-issues' 
-                    ? 'bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-400 dark:border-yellow-600 pl-4 rounded-r-lg' 
+                    ? 'bg-yellow-50 border-l-4 border-yellow-400 pl-4 rounded-r-lg' 
                     : ''
                 }`}
               >
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">How We Address Copyright Issues</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">How We Address Copyright Issues</h2>
                 <div className="prose prose-lg max-w-none">
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     Papyrus enforces a strict policy against copyright infringement in accordance with Italian 
                     copyright law (Law No. 633/1941) and the European Union Directive on Copyright in the Digital 
                     Single Market (Directive (EU) 2019/790). This policy is applied consistently across all countries 
                     where our Services are available.
                   </p>
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     If you believe that your copyrighted work has been used on Papyrus without your permission, 
                     you may submit a formal copyright infringement notice through our Reporting Copyright 
                     Infringement page.
                   </p>
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     Papyrus reserves the right to remove or disable access to any content that is alleged to infringe 
                     copyright, at our sole discretion, without prior notice and without liability to any party. In cases 
                     of repeated infringement, we may suspend or terminate user accounts in accordance with applicable laws.
                   </p>
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     We also actively monitor websites that copy or distribute Papyrus content without authorization. 
                     When such sites are identified, we take action to have the infringing content removed or access 
                     to it disabled. In order to act on your behalf in such cases, Papyrus requires your legal 
@@ -341,7 +302,7 @@ export default function TermsPage() {
                     under Italian and EU copyright laws to internet service providers and other entities responsible 
                     for hosting or distributing the infringing material.
                   </p>
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     By granting this authorization, you allow Papyrus to protect your rights by pursuing the removal 
                     or disabling of access to infringing or allegedly infringing materials that have been shared 
                     without your consent.
@@ -354,13 +315,13 @@ export default function TermsPage() {
                 id="acceptable-use" 
                 className={`mb-12 transition-all duration-500 ${
                   highlightedSection === 'acceptable-use' 
-                    ? 'bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-400 dark:border-yellow-600 pl-4 rounded-r-lg' 
+                    ? 'bg-yellow-50 border-l-4 border-yellow-400 pl-4 rounded-r-lg' 
                     : ''
                 }`}
               >
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">Acceptable Use Guidelines</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Acceptable Use Guidelines</h2>
                 <div className="prose prose-lg max-w-none">
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     Papyrus is used by millions of people around the world. To keep the platform respectful, safe, 
                     and enjoyable for everyone, we expect all users to act responsibly. Please review our Code of 
                     Conduct for detailed community standards. In addition to those rules, please keep the following 
@@ -368,49 +329,49 @@ export default function TermsPage() {
                   </p>
                   <div className="space-y-4">
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Follow the law.</h3>
-                      <p className="text-gray-700 dark:text-gray-300">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Follow the law.</h3>
+                      <p className="text-gray-700">
                         Do not break any laws, infringe on the rights of others, or violate any legal agreements you may have.
                       </p>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Protect others' devices.</h3>
-                      <p className="text-gray-700 dark:text-gray-300">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Protect others' devices.</h3>
+                      <p className="text-gray-700">
                         Do not upload or share viruses, malware, or any software that is intended to damage or 
                         interfere with another user's device or system.
                       </p>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Do not disrupt Papyrus's platform.</h3>
-                      <p className="text-gray-700 dark:text-gray-300">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Do not disrupt Papyrus's platform.</h3>
+                      <p className="text-gray-700">
                         Avoid any actions that interfere with the proper functioning of Papyrus. This includes attempts 
                         to bypass our security measures, gain unauthorized access to our systems, or overload our 
                         servers or those of our partners.
                       </p>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">No scraping or unauthorized data collection.</h3>
-                      <p className="text-gray-700 dark:text-gray-300">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">No scraping or unauthorized data collection.</h3>
+                      <p className="text-gray-700">
                         Do not use bots, scripts, or automated tools to collect content or data from Papyrus. Manual 
                         copying for such purposes is also prohibited.
                       </p>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Respect creators' rights.</h3>
-                      <p className="text-gray-700 dark:text-gray-300">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Respect creators' rights.</h3>
+                      <p className="text-gray-700">
                         Do not copy, reproduce, translate, distribute, or build upon someone else's work without their 
                         clear permission.
                       </p>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Respect Papyrus's intellectual property.</h3>
-                      <p className="text-gray-700 dark:text-gray-300">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Respect Papyrus's intellectual property.</h3>
+                      <p className="text-gray-700">
                         Do not reverse engineer, decompile, or try to extract any part of Papyrus's software, design, or source code.
                       </p>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Use Papyrus for personal, not commercial, purposes.</h3>
-                      <p className="text-gray-700 dark:text-gray-300">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Use Papyrus for personal, not commercial, purposes.</h3>
+                      <p className="text-gray-700">
                         Papyrus is intended for individual use—not for promoting or selling unrelated products or services. 
                         You are welcome to promote your own books for sale on third-party platforms, but using Papyrus 
                         to advertise unrelated products or services is not allowed.
@@ -425,24 +386,24 @@ export default function TermsPage() {
                 id="disclaimers" 
                 className={`mb-12 transition-all duration-500 ${
                   highlightedSection === 'disclaimers' 
-                    ? 'bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-400 dark:border-yellow-600 pl-4 rounded-r-lg' 
+                    ? 'bg-yellow-50 border-l-4 border-yellow-400 pl-4 rounded-r-lg' 
                     : ''
                 }`}
               >
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">Disclaimers, Limitations of Liability, and Indemnification</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Disclaimers, Limitations of Liability, and Indemnification</h2>
                 <div className="prose prose-lg max-w-none">
                   <div className="space-y-6">
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">1. Legal Applicability</h3>
-                      <p className="text-gray-700 dark:text-gray-300">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">1. Legal Applicability</h3>
+                      <p className="text-gray-700">
                         These terms apply only to the extent allowed by applicable law. In some jurisdictions, certain 
                         legal protections—such as implied warranties or limits on liability—cannot be waived. Nothing 
                         in this section affects any rights you may have that cannot legally be limited or excluded.
                       </p>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">2. No Warranties</h3>
-                      <p className="text-gray-700 dark:text-gray-300">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">2. No Warranties</h3>
+                      <p className="text-gray-700">
                         You use Papyrus's Services and content at your own risk. All Services and content are provided 
                         "as is" and "as available," without warranties of any kind. Papyrus makes no express or implied 
                         guarantees, including those related to merchantability, fitness for a particular purpose, 
@@ -451,8 +412,8 @@ export default function TermsPage() {
                       </p>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">3. Responsibility for Content</h3>
-                      <p className="text-gray-700 dark:text-gray-300">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">3. Responsibility for Content</h3>
+                      <p className="text-gray-700">
                         All content posted on Papyrus, whether public or private, is the sole responsibility of the person 
                         who created it. We do not routinely monitor or verify user content and do not guarantee its 
                         accuracy, reliability, or truthfulness. You may encounter content that is offensive, misleading, or 
@@ -460,8 +421,8 @@ export default function TermsPage() {
                       </p>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">4. Release of Liability</h3>
-                      <p className="text-gray-700 dark:text-gray-300">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">4. Release of Liability</h3>
+                      <p className="text-gray-700">
                         By using Papyrus, you agree to release us from any claims, disputes, damages, or legal demands 
                         related to conflicts between users, disputes involving users and third parties, and any issues 
                         that arise through the use of the Services. This release includes both known and unknown claims, 
@@ -469,8 +430,8 @@ export default function TermsPage() {
                       </p>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">5. Papyrus's Liability</h3>
-                      <p className="text-gray-700 dark:text-gray-300">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">5. Papyrus's Liability</h3>
+                      <p className="text-gray-700">
                         Papyrus is not liable for any kind of damages resulting from your use of the Services. This 
                         includes, but is not limited to service interruptions, errors, or security issues, all categories 
                         of damages (direct, indirect, incidental, punitive, or consequential), loss of data, income, or 
@@ -479,8 +440,8 @@ export default function TermsPage() {
                       </p>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">6. Your Responsibility to Papyrus</h3>
-                      <p className="text-gray-700 dark:text-gray-300">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">6. Your Responsibility to Papyrus</h3>
+                      <p className="text-gray-700">
                         If your actions cause Papyrus to face legal or financial issues, you agree to compensate us for 
                         any resulting losses. This includes legal fees, damages, and claims arising from your breach of 
                         these Terms or misuse of the Services. Papyrus reserves the right to assume full control over any 
@@ -488,8 +449,8 @@ export default function TermsPage() {
                       </p>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">7. Third-Party Links</h3>
-                      <p className="text-gray-700 dark:text-gray-300">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">7. Third-Party Links</h3>
+                      <p className="text-gray-700">
                         The platform may contain links to external websites that are not controlled or endorsed by Papyrus. 
                         If you choose to visit those sites, you do so at your own risk.
                       </p>
@@ -503,23 +464,23 @@ export default function TermsPage() {
                 id="advertisements" 
                 className={`mb-12 transition-all duration-500 ${
                   highlightedSection === 'advertisements' 
-                    ? 'bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-400 dark:border-yellow-600 pl-4 rounded-r-lg' 
+                    ? 'bg-yellow-50 border-l-4 border-yellow-400 pl-4 rounded-r-lg' 
                     : ''
                 }`}
               >
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">Serving Advertisements</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Serving Advertisements</h2>
                 <div className="prose prose-lg max-w-none">
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     To keep Papyrus free for everyone, we display advertisements and promotions from third-party 
                     advertisers within the Service. These ads are provided by external partners, and Papyrus does 
                     not control or endorse their content.
                   </p>
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     Please be aware that Papyrus is not responsible for any issues that may result from your 
                     interactions with these advertisers. This includes any losses, damages, or disputes arising from 
                     your reliance on their ads or from any commercial or legal transactions you enter into with them.
                   </p>
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     Any dealings you have with advertisers—such as clicking on an ad, purchasing a product, or 
                     signing up for a service—are strictly between you and the advertiser.
                   </p>
@@ -531,13 +492,13 @@ export default function TermsPage() {
                 id="privacy" 
                 className={`mb-12 transition-all duration-500 ${
                   highlightedSection === 'privacy' 
-                    ? 'bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-400 dark:border-yellow-600 pl-4 rounded-r-lg' 
+                    ? 'bg-yellow-50 border-l-4 border-yellow-400 pl-4 rounded-r-lg' 
                     : ''
                 }`}
               >
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">Privacy Policy</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Privacy Policy</h2>
                 <div className="prose prose-lg max-w-none">
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     At Papyrus Corp. ("Papyrus," "we," or "us"), we are dedicated to protecting your privacy and 
                     keeping your information secure. Papyrus collects and processes information about you in several ways. 
                     This Privacy Policy explains how we collect, use, share, and protect your personal information 
@@ -545,13 +506,13 @@ export default function TermsPage() {
                     mobile apps to post content to the Papyrus community, including stories you write, comments, and 
                     messages (the "Services").
                   </p>
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
-                    Please note that our <button onClick={() => scrollToSection('welcome')} className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-600 underline">Terms of Service</button> also apply to this Privacy Policy. By creating a Papyrus 
+                  <p className="text-gray-700 mb-4">
+                    Please note that our <button onClick={() => scrollToSection('welcome')} className="text-blue-600 hover:text-blue-800 underline">Terms of Service</button> also apply to this Privacy Policy. By creating a Papyrus 
                     account, using the Services, or providing any Personal Information through the Services, you agree 
                     to the collection, use, and sharing of your information as described in this Privacy Policy. If 
                     you do not agree with how we use your Personal Information, please stop using the Services.
                   </p>
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     This is important information, so we encourage you to read it carefully.
                   </p>
                 </div>
@@ -562,20 +523,20 @@ export default function TermsPage() {
                 id="information-collection" 
                 className={`mb-12 transition-all duration-500 ${
                   highlightedSection === 'information-collection' 
-                    ? 'bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-400 dark:border-yellow-600 pl-4 rounded-r-lg' 
+                    ? 'bg-yellow-50 border-l-4 border-yellow-400 pl-4 rounded-r-lg' 
                     : ''
                 }`}
               >
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">What Information Do We Collect and Why?</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">What Information Do We Collect and Why?</h2>
                 <div className="prose prose-lg max-w-none">
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     To create your Papyrus account and use our Services, we collect and process some Personal Information. 
                     Depending on how you use Papyrus, the information we collect may include:
                   </p>
                   <div className="space-y-4">
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Information We Collect:</h3>
-                      <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Information We Collect:</h3>
+                      <ul className="list-disc list-inside text-gray-700 space-y-2">
                         <li>Required information: Your username, email address, date of birth, and password.</li>
                         <li>Third-party info: If you sign up through services like Facebook or Google, they share information like your email and birthdate with us.</li>
                         <li>Optional information: Details you provide such as your real name, gender, and location.</li>
@@ -583,8 +544,8 @@ export default function TermsPage() {
                       </ul>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Why We Use This Information:</h3>
-                      <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Why We Use This Information:</h3>
+                      <ul className="list-disc list-inside text-gray-700 space-y-2">
                         <li>To create and manage your Papyrus account and provide the Services.</li>
                         <li>To recognize you when you sign in, post stories, or comment.</li>
                         <li>To show content that fits your age.</li>
@@ -608,13 +569,13 @@ export default function TermsPage() {
                 id="legal-grounds" 
                 className={`mb-12 transition-all duration-500 ${
                   highlightedSection === 'legal-grounds' 
-                    ? 'bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-400 dark:border-yellow-600 pl-4 rounded-r-lg' 
+                    ? 'bg-yellow-50 border-l-4 border-yellow-400 pl-4 rounded-r-lg' 
                     : ''
                 }`}
               >
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">Legal Grounds for Using Your Personal Information</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Legal Grounds for Using Your Personal Information</h2>
                 <div className="prose prose-lg max-w-none">
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     At Papyrus, we only use your personal information when we have a valid legal reason. Below is a 
                     list of how we use your data and the legal basis for each purpose, especially for users in the 
                     European Economic Area (EEA), United Kingdom, and Switzerland.
@@ -622,28 +583,28 @@ export default function TermsPage() {
                   <div className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">1. To create your Papyrus account and provide our services</h3>
-                        <p className="text-gray-700 dark:text-gray-300 text-sm">Legal Basis: Necessary for performing our Terms of Service.</p>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-2">1. To create your Papyrus account and provide our services</h3>
+                        <p className="text-gray-700 text-sm">Legal Basis: Necessary for performing our Terms of Service.</p>
                       </div>
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">2. To identify you across the platform</h3>
-                        <p className="text-gray-700 dark:text-gray-300 text-sm">Legal Basis: Legitimate interest in delivering and maintaining our services.</p>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-2">2. To identify you across the platform</h3>
+                        <p className="text-gray-700 text-sm">Legal Basis: Legitimate interest in delivering and maintaining our services.</p>
                       </div>
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">3. To provide age-appropriate content</h3>
-                        <p className="text-gray-700 dark:text-gray-300 text-sm">Legal Basis: Legitimate interest in complying with content guidelines.</p>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-2">3. To provide age-appropriate content</h3>
+                        <p className="text-gray-700 text-sm">Legal Basis: Legitimate interest in complying with content guidelines.</p>
                       </div>
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">4. To offer technical and customer support</h3>
-                        <p className="text-gray-700 dark:text-gray-300 text-sm">Legal Basis: Legitimate interest in assisting users and solving issues.</p>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-2">4. To offer technical and customer support</h3>
+                        <p className="text-gray-700 text-sm">Legal Basis: Legitimate interest in assisting users and solving issues.</p>
                       </div>
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">5. To send essential updates and service-related messages</h3>
-                        <p className="text-gray-700 dark:text-gray-300 text-sm">Legal Basis: Necessary for fulfilling our contract with you.</p>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-2">5. To send essential updates and service-related messages</h3>
+                        <p className="text-gray-700 text-sm">Legal Basis: Necessary for fulfilling our contract with you.</p>
                       </div>
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">6. To send marketing emails</h3>
-                        <p className="text-gray-700 dark:text-gray-300 text-sm">Legal Basis: Your consent (only where required by law).</p>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-2">6. To send marketing emails</h3>
+                        <p className="text-gray-700 text-sm">Legal Basis: Your consent (only where required by law).</p>
                       </div>
                     </div>
                   </div>
@@ -655,29 +616,29 @@ export default function TermsPage() {
                 id="data-storage" 
                 className={`mb-12 transition-all duration-500 ${
                   highlightedSection === 'data-storage' 
-                    ? 'bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-400 dark:border-yellow-600 pl-4 rounded-r-lg' 
+                    ? 'bg-yellow-50 border-l-4 border-yellow-400 pl-4 rounded-r-lg' 
                     : ''
                 }`}
               >
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">Where is your Personal Information stored?</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Where is your Personal Information stored?</h2>
                 <div className="prose prose-lg max-w-none">
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     Our services are primarily operated from our offices in Italy. However, the Personal Information 
                     you provide through Papyrus may be transferred to and stored in other countries, such as the 
                     United States, for processing and storage. Additionally, our trusted third-party service providers 
                     may also handle or store your information on servers outside your country.
                   </p>
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     By using Papyrus or submitting your Personal Information through our services, you agree to 
                     this transfer and processing. Please note that privacy protections and government access to 
                     data may vary in these countries compared to your own.
                   </p>
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     We follow all applicable legal requirements when transferring Personal Information internationally. 
                     If you are located in the European Economic Area, Switzerland, or the UK, we use approved methods 
                     for transferring your data, including:
                   </p>
-                  <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                  <ul className="list-disc list-inside text-gray-700 space-y-2">
                     <li>Decisions by the EU Commission, Swiss government, or UK authorities confirming adequate protection</li>
                     <li>Contractual agreements ensuring data protection</li>
                     <li>Other legal transfer mechanisms</li>
@@ -690,55 +651,55 @@ export default function TermsPage() {
                 id="user-rights" 
                 className={`mb-12 transition-all duration-500 ${
                   highlightedSection === 'user-rights' 
-                    ? 'bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-400 dark:border-yellow-600 pl-4 rounded-r-lg' 
+                    ? 'bg-yellow-50 border-l-4 border-yellow-400 pl-4 rounded-r-lg' 
                     : ''
                 }`}
               >
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">Your Rights</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Your Rights</h2>
                 <div className="prose prose-lg max-w-none">
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     If you want to access, correct, or delete any Personal Information we have about you, please 
                     contact us by email at privacy@papyrus.com. We will respond to your requests as required by 
                     law and our policies, taking into account any technical limitations. You can also update or delete 
-                    your Personal Information by logging into your account and editing your profile. For more details about your rights, see our <button onClick={() => scrollToSection('user-rights')} className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-600 underline">Your Rights</button> section.
+                    your Personal Information by logging into your account and editing your profile. For more details about your rights, see our <button onClick={() => scrollToSection('user-rights')} className="text-blue-600 hover:text-blue-800 underline">Your Rights</button> section.
                   </p>
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     If you live in the European Economic Area, Switzerland, or the United Kingdom, you have these 
                     additional rights regarding your Personal Information:
                   </p>
                   <div className="space-y-4">
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Access and Portability</h3>
-                      <p className="text-gray-700 dark:text-gray-300">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Access and Portability</h3>
+                      <p className="text-gray-700">
                         You can ask us to provide a copy of the Personal Information we hold about you, including a 
                         machine-readable copy of the information you have given us, and details about how we use it.
                       </p>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Correction and Deletion</h3>
-                      <p className="text-gray-700 dark:text-gray-300">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Correction and Deletion</h3>
+                      <p className="text-gray-700">
                         You can request that we correct any inaccurate information, or have your data anonymized or 
                         deleted when appropriate. You can also update or delete your Personal Information by logging 
                         into your profile.
                       </p>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Restriction and Objection</h3>
-                      <p className="text-gray-700 dark:text-gray-300">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Restriction and Objection</h3>
+                      <p className="text-gray-700">
                         You can ask us to limit how we use your Personal Information or object to its use.
                       </p>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Withdrawal of Consent</h3>
-                      <p className="text-gray-700 dark:text-gray-300">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Withdrawal of Consent</h3>
+                      <p className="text-gray-700">
                         You can withdraw any consent you have given us for processing your Personal Information at 
                         any time, free of charge. This will not affect the lawfulness of processing done before you 
                         withdrew consent.
                       </p>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Filing a Complaint</h3>
-                      <p className="text-gray-700 dark:text-gray-300">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Filing a Complaint</h3>
+                      <p className="text-gray-700">
                         You have the right to file a complaint with a relevant data protection authority, such as 
                         in your country of residence or work.
                       </p>
@@ -752,18 +713,18 @@ export default function TermsPage() {
                 id="automated-decisions" 
                 className={`mb-12 transition-all duration-500 ${
                   highlightedSection === 'automated-decisions' 
-                    ? 'bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-400 dark:border-yellow-600 pl-4 rounded-r-lg' 
+                    ? 'bg-yellow-50 border-l-4 border-yellow-400 pl-4 rounded-r-lg' 
                     : ''
                 }`}
               >
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">Automated Decision Making</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Automated Decision Making</h2>
                 <div className="prose prose-lg max-w-none">
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     We do not make decisions that have legal or similarly significant effects on you based solely on 
                     automated processing of your Personal Information. Any decisions related to the processing of your 
                     data involve human review and intervention.
                   </p>
-                </div>
+        </div>
               </section>
 
               {/* Data Protection Section */}
@@ -771,13 +732,13 @@ export default function TermsPage() {
                 id="data-protection" 
                 className={`mb-12 transition-all duration-500 ${
                   highlightedSection === 'data-protection' 
-                    ? 'bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-400 dark:border-yellow-600 pl-4 rounded-r-lg' 
+                    ? 'bg-yellow-50 border-l-4 border-yellow-400 pl-4 rounded-r-lg' 
                     : ''
                 }`}
               >
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">How does Papyrus protect and retain my Personal Information?</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">How does Papyrus protect and retain my Personal Information?</h2>
                 <div className="prose prose-lg max-w-none">
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     We continually update and maintain physical, organizational, contractual, and technical security 
                     measures to protect your Personal Information from loss, theft, unauthorized access, disclosure, 
                     copying, use, or alteration. Only employees who need access to your information for their job 
@@ -792,25 +753,25 @@ export default function TermsPage() {
                 id="data-retention" 
                 className={`mb-12 transition-all duration-500 ${
                   highlightedSection === 'data-retention' 
-                    ? 'bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-400 dark:border-yellow-600 pl-4 rounded-r-lg' 
+                    ? 'bg-yellow-50 border-l-4 border-yellow-400 pl-4 rounded-r-lg' 
                     : ''
                 }`}
               >
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">How long does Papyrus keep my Personal Information?</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">How long does Papyrus keep my Personal Information?</h2>
                 <div className="prose prose-lg max-w-none">
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     We keep your Personal Information only as long as needed for the purposes it was collected, 
                     unless the law requires us to keep it longer. When deciding how long to keep your data, we 
                     consider factors like the services you use, our relationship with you, legal requirements, and any 
-                    limitation periods. For details on how we protect your data, see our <button onClick={() => scrollToSection('data-protection')} className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-600 underline">Data Protection</button> section.
+                    limitation periods. For details on how we protect your data, see our <button onClick={() => scrollToSection('data-protection')} className="text-blue-600 hover:text-blue-800 underline">Data Protection</button> section.
                   </p>
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     If you create a Papyrus account, we will retain your Personal Information while your account is 
                     active. When you close your account, it will be deactivated for six months. During this time, 
                     your account won't be visible, but your public contributions and comments will remain, though 
                     they will be anonymized.
                   </p>
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     Within these six months, you can restore your account if it was closed by mistake, and your 
                     contributions will be linked back to your profile. After six months, we permanently delete your 
                     Personal Information, but anonymized comments and contributions will remain on the platform.
@@ -823,13 +784,13 @@ export default function TermsPage() {
                 id="changes" 
                 className={`mb-12 transition-all duration-500 ${
                   highlightedSection === 'changes' 
-                    ? 'bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-400 dark:border-yellow-600 pl-4 rounded-r-lg' 
+                    ? 'bg-yellow-50 border-l-4 border-yellow-400 pl-4 rounded-r-lg' 
                     : ''
                 }`}
               >
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">Changes</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Changes</h2>
                 <div className="prose prose-lg max-w-none">
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-700 mb-4">
                     We may update this Privacy Policy from time to time. If you disagree with any changes and do 
                     not want your Personal Information to be handled under the updated policy, please close your 
                     account or stop using the Services. We recommend reviewing this Privacy Policy regularly.
