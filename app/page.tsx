@@ -123,13 +123,13 @@ export default function TermsPage() {
            
                 <div className="prose prose-lg max-w-none">
                   <p className="text-gray-700 mb-4">
-                    Welcome to the Papyrus platform, owned and operated by Papyrus Corp. ("Papyrus", "we", or "us"). 
+                    Welcome to the Papyrus platform, owned and operated by Papyrus Corp. (&quot;Papyrus&quot;, &quot;we&quot;, or &quot;us&quot;). 
                     These Terms of Service, along with our <button onClick={() => scrollToSection('acceptable-use')} className="text-blue-600 hover:text-blue-800 underline">Code of Conduct</button> and <button onClick={() => scrollToSection('privacy')} className="text-blue-600 hover:text-blue-800 underline">Privacy Policy</button>, form a legal agreement 
                     between you and Papyrus.
                   </p>
                   <p className="text-gray-700 mb-4">
-                    By using papyrus.com (the "Site"), creating a Papyrus account, posting content (such as stories, 
-                    comments, or messages), or viewing content through our website or mobile apps (collectively, the "Services"), 
+                    By using papyrus.com (the &quot;Site&quot;), creating a Papyrus account, posting content (such as stories, 
+                    comments, or messages), or viewing content through our website or mobile apps (collectively, the &quot;Services&quot;), 
                     you agree to follow these Terms of Service.
                   </p>
                   <p className="text-gray-700 mb-4">
@@ -196,7 +196,7 @@ export default function TermsPage() {
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">You Own Your Content</h2>
                 <div className="prose prose-lg max-w-none">
                   <p className="text-gray-700 mb-4">
-                    Before sharing anything on Papyrus, please review our <button onClick={() => scrollToSection('acceptable-use')} className="text-blue-600 hover:text-blue-800 underline">Content Guidelines</button>. If your content doesn't 
+                    Before sharing anything on Papyrus, please review our <button onClick={() => scrollToSection('acceptable-use')} className="text-blue-600 hover:text-blue-800 underline">Content Guidelines</button>. If your content doesn&apos;t 
                     follow these rules, it may be removed at any time.
                   </p>
                   <p className="text-gray-700 mb-4">
@@ -335,14 +335,14 @@ export default function TermsPage() {
                       </p>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Protect others' devices.</h3>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Protect others&apos; devices.</h3>
                       <p className="text-gray-700">
                         Do not upload or share viruses, malware, or any software that is intended to damage or 
-                        interfere with another user's device or system.
+                        interfere with another user&apos;s device or system.
                       </p>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Do not disrupt Papyrus's platform.</h3>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Do not disrupt Papyrus&apos;s platform.</h3>
                       <p className="text-gray-700">
                         Avoid any actions that interfere with the proper functioning of Papyrus. This includes attempts 
                         to bypass our security measures, gain unauthorized access to our systems, or overload our 
@@ -357,16 +357,16 @@ export default function TermsPage() {
                       </p>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Respect creators' rights.</h3>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Respect creators&apos; rights.</h3>
                       <p className="text-gray-700">
-                        Do not copy, reproduce, translate, distribute, or build upon someone else's work without their 
+                        Do not copy, reproduce, translate, distribute, or build upon someone else&apos;s work without their 
                         clear permission.
                       </p>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Respect Papyrus's intellectual property.</h3>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Respect Papyrus&apos;s intellectual property.</h3>
                       <p className="text-gray-700">
-                        Do not reverse engineer, decompile, or try to extract any part of Papyrus's software, design, or source code.
+                        Do not reverse engineer, decompile, or try to extract any part of Papyrus&apos;s software, design, or source code.
                       </p>
                     </div>
                     <div>
@@ -404,8 +404,8 @@ export default function TermsPage() {
                     <div>
                       <h3 className="text-lg font-semibold text-gray-900 mb-2">2. No Warranties</h3>
                       <p className="text-gray-700">
-                        You use Papyrus's Services and content at your own risk. All Services and content are provided 
-                        "as is" and "as available," without warranties of any kind. Papyrus makes no express or implied 
+                        You use Papyrus&apos;s Services and content at your own risk. All Services and content are provided 
+                        &quot;as is&quot; and &quot;as available,&quot; without warranties of any kind. Papyrus makes no express or implied 
                         guarantees, including those related to merchantability, fitness for a particular purpose, 
                         reliability, security, or non-infringement. We also do not promise that the Services will be 
                         uninterrupted or error-free.
@@ -430,12 +430,12 @@ export default function TermsPage() {
                       </p>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">5. Papyrus's Liability</h3>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">5. Papyrus&apos;s Liability</h3>
                       <p className="text-gray-700">
                         Papyrus is not liable for any kind of damages resulting from your use of the Services. This 
                         includes, but is not limited to service interruptions, errors, or security issues, all categories 
                         of damages (direct, indirect, incidental, punitive, or consequential), loss of data, income, or 
-                        profits, and actions or content provided by other users or third parties. In all cases, Papyrus's 
+                        profits, and actions or content provided by other users or third parties. In all cases, Papyrus&apos;s 
                         total liability will not exceed 100 Canadian dollars (CAD $100).
                       </p>
                     </div>
@@ -499,12 +499,12 @@ export default function TermsPage() {
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">Privacy Policy</h2>
                 <div className="prose prose-lg max-w-none">
                   <p className="text-gray-700 mb-4">
-                    At Papyrus Corp. ("Papyrus," "we," or "us"), we are dedicated to protecting your privacy and 
+                    At Papyrus Corp. (&quot;Papyrus,&quot; &quot;we,&quot; or &quot;us&quot;), we are dedicated to protecting your privacy and 
                     keeping your information secure. Papyrus collects and processes information about you in several ways. 
                     This Privacy Policy explains how we collect, use, share, and protect your personal information 
-                    ("Personal Information") when you create a Papyrus account and use papyrus.com (the "Site") or our 
+                    (&quot;Personal Information&quot;) when you create a Papyrus account and use papyrus.com (the &quot;Site&quot;) or our 
                     mobile apps to post content to the Papyrus community, including stories you write, comments, and 
-                    messages (the "Services").
+                    messages (the &quot;Services&quot;).
                   </p>
                   <p className="text-gray-700 mb-4">
                     Please note that our <button onClick={() => scrollToSection('welcome')} className="text-blue-600 hover:text-blue-800 underline">Terms of Service</button> also apply to this Privacy Policy. By creating a Papyrus 
@@ -768,7 +768,7 @@ export default function TermsPage() {
                   <p className="text-gray-700 mb-4">
                     If you create a Papyrus account, we will retain your Personal Information while your account is 
                     active. When you close your account, it will be deactivated for six months. During this time, 
-                    your account won't be visible, but your public contributions and comments will remain, though 
+                    your account won&apos;t be visible, but your public contributions and comments will remain, though 
                     they will be anonymized.
                   </p>
                   <p className="text-gray-700 mb-4">
