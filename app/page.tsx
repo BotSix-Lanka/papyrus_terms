@@ -14,6 +14,7 @@ export default function TermsPage() {
     { id: 'service-rights', title: 'Our Rights to the Services', anchor: 'service-rights' },
     { id: 'copyright-issues', title: 'How We Address Copyright Issues', anchor: 'copyright-issues' },
     { id: 'acceptable-use', title: 'Acceptable Use Guidelines', anchor: 'acceptable-use' },
+    { id: 'racism', title: 'Racism and Religious Racism', anchor: 'racism' },
     { id: 'disclaimers', title: 'Disclaimers, Limitations of Liability, and Indemnification', anchor: 'disclaimers' },
     { id: 'advertisements', title: 'Serving Advertisements', anchor: 'advertisements' },
     { id: 'privacy', title: 'Privacy Policy', anchor: 'privacy' },
@@ -378,6 +379,29 @@ export default function TermsPage() {
                       </p>
                     </div>
                   </div>
+                </div>
+              </section>
+
+              {/* Racism and Religious Racism Section */}
+              <section 
+                id="racism" 
+                className={`mb-12 transition-all duration-500 ${
+                  highlightedSection === 'racism' 
+                    ? 'bg-yellow-50 border-l-4 border-yellow-400 pl-4 rounded-r-lg' 
+                    : ''
+                }`}
+              >
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Racism and Religious Racism</h2>
+                <div className="prose prose-lg max-w-none">
+                  <p className="text-gray-700 mb-4">
+                    Papyrus is committed to providing a platform that is free from all forms of racism, including religious racism. We do not tolerate any content, behavior, or communication that promotes, incites, or condones discrimination, hatred, or violence based on race, ethnicity, nationality, religion, or belief.
+                  </p>
+                  <p className="text-gray-700 mb-4">
+                    Users must not post, share, or endorse any material that demeans, marginalizes, or targets individuals or groups on the basis of their race or religion. This includes, but is not limited to, slurs, stereotypes, hate speech, or the denial of historical events related to racism or religious persecution.
+                  </p>
+                  <p className="text-gray-700 mb-4">
+                    Violations of this policy may result in the removal of content, suspension, or termination of accounts, and, where appropriate, reporting to relevant authorities. We encourage users to report any instances of racism or religious discrimination encountered on the platform.
+                  </p>
                 </div>
               </section>
 
